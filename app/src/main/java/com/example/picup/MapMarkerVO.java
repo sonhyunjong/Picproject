@@ -24,4 +24,7 @@ public class MapMarkerVO {
     public String toString() {
         return "경도:"+this.getLatitude()+" , 위도: "+ this.getLongtitude();
     }
+
+    public static class LoginActivity {
+    }
 }

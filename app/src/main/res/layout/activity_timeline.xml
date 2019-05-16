@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+   <!-- <me.relex.circleindicator.CircleIndicator
+        android:id="@+id/indicator"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="152dp"
+        app:ci_drawable="@drawable/black_radius"
+        app:ci_height="7dp"
+        app:ci_margin="4dp"
+        app:ci_width="7dp" />-->
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vpPager"
+        android:layout_width="match_parent"
+        android:layout_height="195dp"
+        android:layout_alignParentTop="true" />
+
+
+    <GridView
+        android:id="@+id/TimelineGridView"
+        android:layout_width="match_parent"
+        android:layout_height="534dp"
+
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="197dp"
+        android:columnWidth="90dp"
+        android:horizontalSpacing="10dp"
+        android:numColumns="3"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="10dp">
+
+    </GridView>
+
+
+
+
+</RelativeLayout>
