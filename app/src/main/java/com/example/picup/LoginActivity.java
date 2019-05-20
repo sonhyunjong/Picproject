@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
                     input.put("userPassword", edtPassword.getText().toString());
 
 
-                    Retrofit retrofit = new Retrofit.Builder().baseUrl("http://172.30.3.25:8888/")
+                    Retrofit retrofit = new Retrofit.Builder().baseUrl("http://172.30.2.117:8888/")
                             .addConverterFactory(GsonConverterFactory.create()).build();
                     UserService loginApi = retrofit.create(UserService.class);
 
@@ -76,6 +76,8 @@ public class LoginActivity extends AppCompatActivity {
                                             break;
                                         case 1:
                                             Toast.makeText(LoginActivity.this, "로그인 입니다.", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                            startActivity(intent);
                                             Log.d("12321" , map.getUser().getUserName());
                                             break;
                                     }

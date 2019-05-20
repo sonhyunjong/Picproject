@@ -49,6 +49,6 @@ public class JoinRequest {
     }
 
 
-    public static class JoinActivity {
+    public static class RegisterActivity {
     }
 }

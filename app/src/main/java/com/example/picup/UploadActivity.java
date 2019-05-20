@@ -1,3 +1,5 @@
+/*
+
 package com.example.picup;
 
 import android.content.Intent;
@@ -23,29 +25,21 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UploadActivity extends AppCompatActivity implements  View.OnClickListener{
-    EditText edtUserId;
-    EditText edtPassword;
-    EditText edtUserName;
-    EditText edtUserBirth;
-    RadioGroup edtUserGender;
-    Button btnJoin;
+
+    Button btUpload;
     UserService userService;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_post);
 
-        edtUserId = (EditText) findViewById(R.id.idText);
-        edtPassword = (EditText) findViewById(R.id.passwordText);
-        edtUserName = (EditText) findViewById(R.id.username);
-        edtUserBirth = (EditText) findViewById(R.id.birtheText);
-        edtUserGender = (RadioGroup) findViewById(R.id.genderGroup);
-        btnJoin = (Button) findViewById(R.id.joinButton);
+
+        btUpload = (Button) findViewById(R.id.btUpload);
 
         userService = ApiUtils.getUserService();
 
-        btnJoin.setOnClickListener(this);
+        btUpload.setOnClickListener(this);
 
         int result = edtUserGender.getCheckedRadioButtonId();  // 결과를 출력할 문자열  ,  항상 스트링은 빈문자열로 초기화 하는 습관을 가지자
         RadioButton rb = (RadioButton) findViewById(result);
@@ -131,3 +125,4 @@ public class UploadActivity extends AppCompatActivity implements  View.OnClickLi
         });
     }
 }
+*/

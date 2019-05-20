@@ -1,95 +1,87 @@
 package com.example.picup;
 
+
 import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Animatable;
-import android.media.DrmInitData;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.ExifInterface;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupMenu;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import net.daum.android.map.MapViewEventListener;
 import net.daum.mf.map.api.CalloutBalloonAdapter;
+import net.daum.mf.map.api.CameraUpdateFactory;
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
+import net.daum.mf.map.api.MapPointBounds;
 import net.daum.mf.map.api.MapReverseGeoCoder;
 import net.daum.mf.map.api.MapView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileDescriptor;
 import java.io.IOException;
-import java.net.URL;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static android.provider.ContactsContract.CommonDataKinds.Website.URL;
+import static android.app.PendingIntent.getActivity;
 
 
+public class MainActivity extends AppCompatActivity implements MapView.POIItemEventListener, MapView.CurrentLocationEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener{
 
-public class MainActivity extends AppCompatActivity implements MapView.POIItemEventListener, MapView.CurrentLocationEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener {
-
-    MapMarkerVO marker;
+    MapMarkerVO marker= new MapMarkerVO();
     private String mCurrentPhotoPath;
-    private MapView mapView;
+
     private  View mCalloutBalloon;
+    static final int REQUEST_TAKE_PHOTO=1;
+    final static int TAKE_PICTURE=1;
+    MapView mapView ;
+    private MapPOIItem mCustomMarker;
+    private MapPOIItem mCustomBmMarker;
 
-    class CustomCalloutBalloonAdapter implements CalloutBalloonAdapter {// 커스텀 마커
 
-        public CustomCalloutBalloonAdapter() {
-            mCalloutBalloon = getLayoutInflater().inflate(R.layout.custom_callout_balloon, null);
-        }
 
-        @Override
-        public View getCalloutBalloon(MapPOIItem poiItem) {
-            ((ImageView) mCalloutBalloon.findViewById(R.id.badge)).setImageResource(R.drawable.mug_obj_201608081434539978);
-            return mCalloutBalloon;
-        }
 
-        @Override
-        public View getPressedCalloutBalloon(MapPOIItem poiItem) {
-            return null;
-        }
-    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        MapView mapView = new MapView(this);
+        mapView = new MapView(this);
+        mapView.setDaumMapApiKey("ead955228613545283791950dc488bac");
+        mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading);
+        ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
+//        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.53737528, 127.00557633), true);
+        mapView.setZoomLevel(7, true);
+        mapViewContainer.addView(mapView);
+        mapView.setPOIItemEventListener(this);
         requirePermission();
-
         ImageButton mypageButton = (ImageButton) findViewById(R.id.mypage_button);
         mypageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements MapView.POIItemEv
                 startActivity(MyPageintent);
             }
         });//내 페이지 버튼
+
 
         ImageButton imageButtonbutton = (ImageButton) findViewById(R.id.camera_button);
         imageButtonbutton.setOnClickListener(new View.OnClickListener() {
@@ -108,34 +101,13 @@ public class MainActivity extends AppCompatActivity implements MapView.POIItemEv
                         (v.getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
                 if (camera && write) {
                     //사진찍은 인텐트 코드 넣기
-                    takePicture();
+                    dispatchTakePictureIntent();
                 } else {
                     Toast.makeText(MainActivity.this, "카메라 권한 및 쓰기 권한을 주지 않았습니다.", Toast.LENGTH_SHORT).show();
                 }
 
             }
         });// 사진 버튼
-
-        // 구현한 CalloutBalloonAdapter 등록
-        mapView.setCalloutBalloonAdapter(new CustomCalloutBalloonAdapter());
-        mapView.setDaumMapApiKey("ead955228613545283791950dc488bac");
-        mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading);
-        ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
-//        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.53737528, 127.00557633), true);
-        mapView.setZoomLevel(7, true);
-        mapViewContainer.addView(mapView);
-//        mapView.setPOIItemEventListener(this);
-
-        MapPOIItem customMarker = new MapPOIItem();
-        customMarker.setItemName("more");
-        customMarker.setTag(1);
-        customMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(37.2706008, 127.01357559999997));
-        customMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커타입을 커스텀 마커로 지정.
-        customMarker.setCustomImageResourceId(R.drawable.custom_map_present_tracking); // 마커 이미지.
-        customMarker.setCustomImageAutoscale(false); // hdpi, xhdpi 등 안드로이드 플랫폼의 스케일을 사용할 경우 지도 라이브러리의 스케일 기능을 꺼줌.
-        customMarker.setCustomImageAnchor(0.5f, 1.0f);// 마커 이미지중 기준이 되는 위치(앵커포인트) 지정 - 마커 이미지 좌측 상단 기준 x(0.0f ~ 1.0f), y(0.0f ~ 1.0f) 값.
-        mapView.addPOIItem(customMarker);
-        onCalloutBalloonOfPOIItemTouched(mapView, customMarker);
 
 
         //현재 위치 마커
@@ -157,6 +129,63 @@ public class MainActivity extends AppCompatActivity implements MapView.POIItemEv
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private void showAll() {
+        int padding = 20;
+        float minZoomLevel = 7;
+        float maxZoomLevel = 10;
+        MapPointBounds bounds = new MapPointBounds(MapPoint.mapPointWithGeoCoord(37.2706008, 127.01357559999997), MapPoint.mapPointWithGeoCoord(37.2706008, 127.01357559999997));
+        mapView.moveCamera(CameraUpdateFactory.newMapPointBounds(bounds, padding, minZoomLevel, maxZoomLevel));
+    }
+    private void createCustomMarker(MapView mapView,Bitmap bitmap) {// 마커 이미지 띄우는 메소드
+
+        mCustomMarker = new MapPOIItem();
+        String name = "More";
+        mCustomMarker.setItemName(name);
+        mCustomMarker.setTag(1);
+        mCustomMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(37.2706008, 127.01357559999997));
+        mCustomMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage);
+        Matrix matrix = new Matrix();
+        matrix.postRotate(90);    //회전시킬 각도
+        Bitmap newBmp = Bitmap.createBitmap(bitmap, 0, 0, //bmp를 matrix로 회전하여 newBmp에
+                bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+        mCustomMarker.setCustomImageBitmap(newBmp);
+
+        // mCustomMarker.setCustomImageResourceId(R.drawable.custom_callout_balloon);
+        mCustomMarker.setCustomImageAutoscale(false);
+        mCustomMarker.setCustomImageAnchor(0.5f, 1.0f);
+
+        mapView.addPOIItem(mCustomMarker);
+        mapView.selectPOIItem(mCustomMarker, true);
+        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.2706008, 127.01357559999997), false);
+
+    }
+
+
+    private void createCustomBitmapMarker(MapView mapView) {
+        mCustomBmMarker = new MapPOIItem();
+        String name = "More";
+        mCustomBmMarker.setItemName(name);
+        mCustomBmMarker.setTag(2);
+        mCustomBmMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(37.2706008, 127.01357559999997));
+        mCustomBmMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage);
+        Bitmap bm = BitmapFactory.decodeResource(getResources(),R.drawable.custom_callout_balloon);
+        mCustomBmMarker.setCustomImageBitmap(bm);
+        mCustomBmMarker.setCustomImageAutoscale(false);
+        mCustomBmMarker.setCustomImageAnchor(0.5f, 0.5f);
+        mCustomMarker.setUserObject(R.layout.custom_callout_balloon);
+
+        mapView.addPOIItem(mCustomBmMarker);
+        mapView.selectPOIItem(mCustomBmMarker, true);
+        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.2706008, 127.01357559999997), false);
+    }
+
+    public static Bitmap rotateImage(Bitmap source, float angle) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
+
+    }
+
     void requirePermission() {  //카메라
         String[] permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         ArrayList<String> listPermissionsNeeded = new ArrayList<>();
@@ -201,15 +230,63 @@ public class MainActivity extends AppCompatActivity implements MapView.POIItemEv
         mCurrentPhotoPath = image.getAbsolutePath();
         return image;
     }
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(this,
+                        "com.example.picup.fileprovider",
+                        photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+            }
+        }
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == 10 ) {
-            ((ImageView) mCalloutBalloon.findViewById(R.id.badge)).setImageResource(Integer.parseInt(mCurrentPhotoPath));
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        super.onActivityResult(requestCode, resultCode, data);
+        try {
+            switch (requestCode) {
+                case REQUEST_TAKE_PHOTO: {
+                    if (resultCode == RESULT_OK) {
+                        File file = new File(mCurrentPhotoPath);
+                        Bitmap bitmap = MediaStore.Images.Media
+                                .getBitmap(getContentResolver(), Uri.fromFile(file));
 
+                        if (bitmap != null) {
+                            createCustomMarker(mapView,bitmap); // 사진 찍은 위치에 마커찍기
+                            ByteArrayOutputStream bstream = new ByteArrayOutputStream();
+                            float scale = (float) (1024/(float)bitmap.getWidth());
+                            int image_w = (int) (bitmap.getWidth() * scale);
+                            int image_h = (int) (bitmap.getHeight() * scale);
+                            Bitmap resize = Bitmap.createScaledBitmap(bitmap, image_w, image_h, true);
+                            resize.compress(Bitmap.CompressFormat.JPEG, 100, bstream);
+                            byte[] byteArray = bstream.toByteArray();
+                            Intent intent = new Intent(MainActivity.this, PostActivity.class);
+                            intent.putExtra("image", byteArray);
+                            startActivity(intent);
+                        }
+                    }
+                    break;
+                }
+            }
+
+        } catch (Exception error) {
+            error.printStackTrace();
         }
-        else
-            Toast.makeText(getApplicationContext(),"실패",Toast.LENGTH_SHORT).show();    }
+
+    }
 
     public void showMap (Uri geoLocation) {
         Intent intent = new Intent(Intent.ACTION_VIEW);

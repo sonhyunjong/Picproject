@@ -39,6 +39,7 @@ public class PostActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "upload", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(PostActivity.this, MainActivity.class);
 
+                startActivity(intent);
 
 
             }

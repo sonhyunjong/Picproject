@@ -120,6 +120,8 @@ public class RegisterActivity extends AppCompatActivity implements  View.OnClick
            @Override
            public void onResponse(Call<ResObj> call, Response<ResObj> response) {
 
+               Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+               startActivity(intent);
                String s = response.body().toString();
                Log.d("12321", "success");
 
