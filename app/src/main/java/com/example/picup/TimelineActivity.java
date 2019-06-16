@@ -26,7 +26,7 @@ import com.bumptech.glide.Glide;
 public class TimelineActivity extends AppCompatActivity {
     FragmentPagerAdapter adapterViewPager;
 
-    GridView mypheed;
+
 
     public static String[] eatFoodyImages = {
             "http://i.imgur.com/rFLNqWI.jpg",
@@ -70,6 +70,13 @@ public class TimelineActivity extends AppCompatActivity {
         gridview.setAdapter(new TimelineAdapter(TimelineActivity.this,
                 eatFoodyImages)
         );
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(getApplicationContext(),MypageActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 

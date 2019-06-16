@@ -3,6 +3,7 @@ package com.example.picup;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -21,7 +22,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends FragmentActivity {
 
     EditText edtUserId;
     EditText edtPassword;
@@ -53,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                     input.put("userPassword", edtPassword.getText().toString());
 
 
-                    Retrofit retrofit = new Retrofit.Builder().baseUrl("http://172.30.2.117:8888/")
+                    Retrofit retrofit = new Retrofit.Builder().baseUrl("http://52.78.148.203:8888/")
                             .addConverterFactory(GsonConverterFactory.create()).build();
                     UserService loginApi = retrofit.create(UserService.class);
 
@@ -106,6 +107,15 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button BButton=findViewById(R.id.BButton);
+        BButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, MapActivity.class);
                 startActivity(intent);
             }
         });

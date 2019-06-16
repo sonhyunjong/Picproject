@@ -64,12 +64,14 @@ public class MypageActivity extends AppCompatActivity {
 
         GridView gridView = (GridView) findViewById(R.id.activity_image_gridview);
 
-        gridView.setAdapter(
-                new ImageAdapter(
-                        MypageActivity.this,
-                        eatFoodyImages
-                )
-        );
+        gridView.setAdapter(new ImageAdapter(MypageActivity.this, eatFoodyImages));
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                CustomDialog customDialog = new CustomDialog(MypageActivity.this);
+
+            }
+        });
         profile=  (ImageView) findViewById(R.id.imageprofile);
 
         startLoadingProfile();
@@ -84,6 +86,8 @@ public class MypageActivity extends AppCompatActivity {
             }
 
         });
+
+
 
 
 

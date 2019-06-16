@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:background="@drawable/takepicture"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,8 +22,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="60dp"
-            android:text="Login"
-            android:textSize="50dp" />
+            android:text="Hello,                        we're PicGo."
+            android:textSize="30dp"
+            android:textStyle="bold"/>
 
         <EditText
             android:id="@+id/idText"
@@ -57,9 +59,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:background="#ffffff"
+            android:background="@color/colorPrimaryDark"
             android:text="Log in"
-            android:textColor="#FCBF66"
+            android:textColor="#ffffff"
             android:textSize="20dp" />
 
         <Button
@@ -68,10 +70,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:background="#ffffff"
+            android:background="@color/colorPrimaryDark"
             android:text="Join membership"
-            android:textColor="#FCBF66"
+            android:textColor="#ffffff"
             android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/BButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
 
     </LinearLayout>
 

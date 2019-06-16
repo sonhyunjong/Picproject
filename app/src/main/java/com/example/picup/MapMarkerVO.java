@@ -22,8 +22,9 @@ public class MapMarkerVO {
 
     @Override
     public String toString() {
-        return "경도:"+this.getLatitude()+" , 위도: "+ this.getLongtitude();
+        return "경도:"+this.getLatitude()/1+" , 위도: "+ this.getLongtitude()/1;
     }
+
 
     public static class LoginActivity {
     }
