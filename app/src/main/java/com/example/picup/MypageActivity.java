@@ -1,4 +1,5 @@
 package com.example.picup;
+<<<<<<< HEAD
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,10 +11,16 @@ import android.os.ParcelFileDescriptor;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+=======
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+<<<<<<< HEAD
 import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -164,4 +171,34 @@ public class MypageActivity extends AppCompatActivity {
 
         return Math.round(ratio);
     }*/
+=======
+import android.widget.GridView;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+
+public class MypageActivity extends AppCompatActivity {
+
+   protected void onCreate(Bundle savedInstanceState){
+       super.onCreate(savedInstanceState);
+       setContentView(R.layout.activity_mypage);
+
+
+
+       ImageView iv= (ImageView)findViewById(R.id.imageView);
+       Glide.with(this).load("https://img.insight.co.kr/static/2018/09/15/700/747cl3tq51cz06846r5u.jpg").into(iv);
+
+
+        GridView gridview=(GridView)findViewById(R.id.GridView);
+        gridview.setAdapter(new ImageAdapter(this));
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
+
+
+    }
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
 }

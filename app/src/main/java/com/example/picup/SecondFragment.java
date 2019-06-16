@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 package com.example.picup;
 
@@ -7,6 +8,16 @@ package com.example.picup;
         import android.view.View;
         import android.view.ViewGroup;
         import android.widget.EditText;
+=======
+package com.example.picup;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
 
 
 public class SecondFragment  extends Fragment {
@@ -43,3 +54,7 @@ public class SecondFragment  extends Fragment {
 }
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f

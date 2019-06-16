@@ -3,7 +3,10 @@ package com.example.picup;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+<<<<<<< HEAD
 import android.support.v4.app.FragmentActivity;
+=======
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -22,7 +25,11 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+<<<<<<< HEAD
 public class LoginActivity extends FragmentActivity {
+=======
+public class LoginActivity extends AppCompatActivity {
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
 
     EditText edtUserId;
     EditText edtPassword;
@@ -54,7 +61,11 @@ public class LoginActivity extends FragmentActivity {
                     input.put("userPassword", edtPassword.getText().toString());
 
 
+<<<<<<< HEAD
                     Retrofit retrofit = new Retrofit.Builder().baseUrl("http://52.78.148.203:8888/")
+=======
+                    Retrofit retrofit = new Retrofit.Builder().baseUrl("http://172.30.3.25:8888/")
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
                             .addConverterFactory(GsonConverterFactory.create()).build();
                     UserService loginApi = retrofit.create(UserService.class);
 
@@ -77,8 +88,11 @@ public class LoginActivity extends FragmentActivity {
                                             break;
                                         case 1:
                                             Toast.makeText(LoginActivity.this, "로그인 입니다.", Toast.LENGTH_SHORT).show();
+<<<<<<< HEAD
                                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                             startActivity(intent);
+=======
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
                                             Log.d("12321" , map.getUser().getUserName());
                                             break;
                                     }
@@ -111,6 +125,7 @@ public class LoginActivity extends FragmentActivity {
             }
         });
 
+<<<<<<< HEAD
         Button BButton=findViewById(R.id.BButton);
         BButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,5 +135,7 @@ public class LoginActivity extends FragmentActivity {
             }
         });
 
+=======
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
     }
 }

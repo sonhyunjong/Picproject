@@ -28,4 +28,7 @@ public class MapMarkerVO {
 
     public static class LoginActivity {
     }
+
+    public static class LoginActivity {
+    }
 }

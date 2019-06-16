@@ -6,7 +6,11 @@
     android:background="#ffffff"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+<<<<<<< HEAD
    <!-- <me.relex.circleindicator.CircleIndicator
+=======
+    <me.relex.circleindicator.CircleIndicator
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
         android:id="@+id/indicator"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -15,7 +19,11 @@
         app:ci_drawable="@drawable/black_radius"
         app:ci_height="7dp"
         app:ci_margin="4dp"
+<<<<<<< HEAD
         app:ci_width="7dp" />-->
+=======
+        app:ci_width="7dp" />
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vpPager"
@@ -43,4 +51,8 @@
 
 
 
+<<<<<<< HEAD
 </RelativeLayout>
+=======
+</RelativeLayout>
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f

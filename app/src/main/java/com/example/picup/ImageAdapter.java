@@ -1,6 +1,7 @@
 package com.example.picup;
 
 import android.content.Context;
+<<<<<<< HEAD
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -89,11 +90,38 @@ public class ImageAdapter extends ArrayAdapter {
     @Override
     public Object getItem(int position) {
         return position;
+=======
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+
+public class ImageAdapter extends BaseAdapter {
+    private  Context mContext;
+    public ImageAdapter(MypageActivity c){
+        mContext=c;
+    }
+
+    @Override
+    public int getCount() {
+        return mThumbIds.length;
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return null;
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
     }
 
     @Override
     public long getItemId(int position) {
+<<<<<<< HEAD
         return position;
+=======
+        return 0;
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
     }
 
     @Override
@@ -101,6 +129,7 @@ public class ImageAdapter extends ArrayAdapter {
         ImageView imageView;
         if (convertView == null) {
             imageView = new ImageView(mContext);
+<<<<<<< HEAD
             imageView.setLayoutParams(new ViewGroup.MarginLayoutParams(300, 300));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setPadding(8, 8, 8, 8);
@@ -188,3 +217,28 @@ public class ImageAdapter extends ArrayAdapter {
 
 
     };*/
+=======
+            imageView.setLayoutParams(new ViewGroup.MarginLayoutParams(350, 460));
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setPadding(1, 1, 1, 1);
+        } else
+            imageView = (ImageView) convertView;
+        imageView.setImageResource(mThumbIds[position]);
+        return imageView;
+    }
+    private Integer[] mThumbIds={
+            R.drawable.sns,
+            R.drawable.sns1,
+            R.drawable.sns2,
+            R.drawable.sns3,
+            R.drawable.sns4,
+            R.drawable.sns5,
+            R.drawable.sns6,
+            R.drawable.sns7,
+            R.drawable.sns8,
+            R.drawable.sns9
+
+
+    };
+}
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
