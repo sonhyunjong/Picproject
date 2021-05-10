@@ -4,11 +4,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+<<<<<<< HEAD
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
     <GridView
         android:id="@+id/activity_image_gridview"
+=======
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+    <GridView
+        android:id="@+id/GridView"
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
         android:layout_width="match_parent"
         android:layout_height="576dp"
         android:layout_alignParentTop="true"
@@ -38,7 +46,11 @@
         android:text="name" />
 
     <ImageView
+<<<<<<< HEAD
         android:id="@+id/imageprofile"
+=======
+        android:id="@+id/imageView"
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
         android:layout_width="92dp"
         android:layout_height="87dp"
         android:layout_alignParentStart="true"
@@ -114,3 +126,8 @@
 </RelativeLayout>
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f

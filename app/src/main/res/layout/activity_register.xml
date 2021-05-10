@@ -4,18 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
     android:background="@color/colorAccent"
    >
+=======
+    android:background="@color/colorPrimary">
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
 
     <TextView
         android:id="@+id/Registermember"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
 
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
         android:text="welcome to PicGo."
+=======
+        android:layout_marginStart="134dp"
+        android:layout_marginLeft="134dp"
+        android:layout_marginTop="50dp"
+        android:text="회원 가입"
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
         android:textSize="30dp" />
 
 
@@ -109,7 +120,11 @@
         android:layout_marginBottom="80dp"
         android:background="#ffffff"
         android:text="Join"
+<<<<<<< HEAD
         android:textColor="@color/colorPrimary"
+=======
+        android:textColor="#FCBF66"
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
         android:textSize="20dp" />
 
 </RelativeLayout>

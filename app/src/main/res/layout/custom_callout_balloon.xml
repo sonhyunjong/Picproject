@@ -15,4 +15,10 @@
         android:adjustViewBounds="true"
         android:src="@drawable/ic_launcher"></ImageView>
 
+<<<<<<< HEAD
 </LinearLayout>
+=======
+    </LinearLayout>
+
+
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f

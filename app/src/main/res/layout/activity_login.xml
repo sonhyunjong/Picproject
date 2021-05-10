@@ -5,8 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
     android:background="@drawable/takepicture"
     >
+=======
+    android:background="@color/colorPrimary">
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,9 +26,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="60dp"
+<<<<<<< HEAD
             android:text="Hello,                        we're PicGo."
             android:textSize="30dp"
             android:textStyle="bold"/>
+=======
+            android:text="Login"
+            android:textSize="50dp" />
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
 
         <EditText
             android:id="@+id/idText"
@@ -59,9 +68,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
+<<<<<<< HEAD
             android:background="@color/colorPrimaryDark"
             android:text="Log in"
             android:textColor="#ffffff"
+=======
+            android:background="#ffffff"
+            android:text="Log in"
+            android:textColor="#FCBF66"
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
             android:textSize="20dp" />
 
         <Button
@@ -70,6 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
+<<<<<<< HEAD
             android:background="@color/colorPrimaryDark"
             android:text="Join membership"
             android:textColor="#ffffff"
@@ -81,6 +97,13 @@
             android:layout_height="wrap_content"
             android:text="Button" />
 
+=======
+            android:background="#ffffff"
+            android:text="Join membership"
+            android:textColor="#FCBF66"
+            android:textSize="20dp" />
+
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

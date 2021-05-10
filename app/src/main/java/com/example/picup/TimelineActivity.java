@@ -10,22 +10,32 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+<<<<<<< HEAD
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+=======
+import android.view.View;
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+<<<<<<< HEAD
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
 //import me.relex.circleindicator.CircleIndicator;
+=======
+
+import me.relex.circleindicator.CircleIndicator;
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
 
 public class TimelineActivity extends AppCompatActivity {
     FragmentPagerAdapter adapterViewPager;
 
+<<<<<<< HEAD
 
 
     public static String[] eatFoodyImages = {
@@ -53,6 +63,8 @@ public class TimelineActivity extends AppCompatActivity {
 
 
 
+=======
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,12 +73,18 @@ public class TimelineActivity extends AppCompatActivity {
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
 
+<<<<<<< HEAD
         /*CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(vpPager);*/
+=======
+        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
+        indicator.setViewPager(vpPager);
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
 
 
         GridView gridview = (GridView) findViewById(R.id.TimelineGridView);
 
+<<<<<<< HEAD
         gridview.setAdapter(new TimelineAdapter(TimelineActivity.this,
                 eatFoodyImages)
         );
@@ -78,6 +96,9 @@ public class TimelineActivity extends AppCompatActivity {
             }
         });
 
+=======
+        gridview.setAdapter(new TimelineAdapter(this));
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
 
 
     }
@@ -116,5 +137,8 @@ public class TimelineActivity extends AppCompatActivity {
 
 
 }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f

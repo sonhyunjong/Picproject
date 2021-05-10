@@ -49,6 +49,10 @@ public class JoinRequest {
     }
 
 
+<<<<<<< HEAD
     public static class RegisterActivity {
+=======
+    public static class JoinActivity {
+>>>>>>> 0ca01f0bcb8051481652daf3e19224866d19480f
     }
 }
